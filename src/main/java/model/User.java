@@ -1,15 +1,25 @@
 package model;
 
+import annotation.FilterFieldGetter;
+
 public interface User {
+    @FilterFieldGetter("user.id")
     int getId();
 
-    void setId(int id);
+    void setId(int userId);
 
-    String getName();
+    @FilterFieldGetter("user.name")
+    String getUserName();
 
-    void setName(String name);
+    void setUserName(String userName);
 
-    UserInfo getUserInfo();
+    @FilterFieldGetter("user.nickname")
+    String getNickname();
 
-    void setUserInfo(UserInfo userInfo);
+    void setNickname(String userNickname);
+
+    @FilterFieldGetter("user.email")
+    String getUserEMail();
+
+    void setUserEMail(String userEMail);
 }
