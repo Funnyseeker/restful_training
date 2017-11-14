@@ -3,7 +3,9 @@ package da.xml;
 import da.UserDao;
 import model.BindKeys;
 import model.User;
+import model.factories.UserFactory;
 import model.filtering.StreamFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -21,6 +23,10 @@ import java.util.stream.Collectors;
  * Принцип хранения данных основан на загрузке\выгрузке в файл XML формата.
  */
 public class XMLUserDao implements UserDao {
+
+    @Autowired
+    UserFactory userFactory;
+
     /**
      * Текущие данные
      */
@@ -50,6 +56,22 @@ public class XMLUserDao implements UserDao {
         filter.putFilterAttribute(BindKeys.USER_NICKNAME, userNickname);
         filter.putFilterAttribute(BindKeys.USER_EMAIL, userEMail);
         return userList.stream().filter(filter.getPredicate()).collect(Collectors.toList());
+    }
+
+    /**
+     * @see UserDao#registerUser(String, String, String)
+     */
+    @Override
+    public User registerUser(String userName, String userNickname, String userEMail) {
+        User user = userFactory.createNew();
+        int newUserId = UserFactory.fisrtId;
+        if (userList.size() != 0) {
+            userList.sort((u1, u2) -> Integer.compare(u1.getId(), u2.getId()));
+            newUserId = userList.get(0).getId() + 1;
+        }
+
+        userFactory.setUserFields(user, newUserId, userName, userNickname, userEMail);
+        return user;
     }
 
     /**

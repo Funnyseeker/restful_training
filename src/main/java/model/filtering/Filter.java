@@ -1,5 +1,7 @@
 package model.filtering;
 
+import org.springframework.util.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +34,10 @@ public abstract class Filter {
     public void putFilterAttribute(String standardKey, Object value) {
         if (filterStandards == null) {
             filterStandards = new HashMap<>();
+        }
+        if (value == null ||
+                (value instanceof String && !StringUtils.hasText((String) value))) {
+            return;
         }
         filterStandards.put(standardKey, value);
     }

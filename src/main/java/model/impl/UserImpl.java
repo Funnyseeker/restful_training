@@ -51,13 +51,13 @@ public class UserImpl implements User {
 
     @Override
     @XmlElement(name = BindKeys.USER_NICKNAME)
-    public String getNickname() {
+    public String getUserNickname() {
         return userNickname;
     }
 
     @Override
     @XmlElement(name = BindKeys.USER_EMAIL)
-    public void setNickname(String userNickname) {
+    public void setUserNickname(String userNickname) {
         this.userNickname = userNickname;
     }
 

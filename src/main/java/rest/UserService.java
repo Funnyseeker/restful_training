@@ -1,15 +1,20 @@
 package rest;
 
 import da.UserDao;
+import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Класс restful сервиса для работы с данными пользователя\пользователей.
@@ -37,17 +42,35 @@ public class UserService {
     /**
      * Ищет пользователей по списку параметров
      *
-     * @param nickname никнэйм пользователя
-     * @param name     имя пользователя
-     * @param email    адрес электронной почты пользователя
+     * @param nickname {@link FormParam} никнэйм пользователя
+     * @param name     {@link FormParam} имя пользователя
+     * @param email    {@link FormParam} адрес электронной почты пользователя
      *
      * @return список пользователей с заданными параметрами
      */
     @GET
     @Path("/usersearch")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSearchResult(@QueryParam("nickname") String nickname, @QueryParam("name") String name,
-                                    @QueryParam("email") String email) {
+    public Response getSearchResult(@FormParam("nickname") String nickname, @FormParam("name") String name,
+                                    @FormParam("email") String email) {
         return Response.status(Response.Status.OK).entity(userDao.searchUsers(nickname, name, email)).build();
+    }
+
+    @PUT
+    @Path("/reguser")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response registerUser(@FormParam("nickname") String nickname, @FormParam("name") String name,
+                                 @FormParam("email") String email) {
+        if (!StringUtils.hasText(email)) {
+            return Response.noContent().build();
+        } else {
+            User newUser = userDao.registerUser(nickname, name, email);
+            try {
+                return Response.created(new URI("UserService/" + newUser.getId())).entity(newUser).build();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+                return Response.noContent().build();
+            }
+        }
     }
 }

@@ -21,12 +21,22 @@ public interface UserDao {
     /**
      * Ищет пользователей по списку параметров
      *
-     * @param userName      имя пользователя
-     * @param userNickname  никнэйм пользователя
-     * @param userEMail адрес электронной почты пользователя
+     * @param userName     имя пользователя
+     * @param userNickname никнэйм пользователя
+     * @param userEMail    адрес электронной почты пользователя
      *
      * @return список пользователей найденных по заданным параметрам
      */
     List<User> searchUsers(String userName, String userNickname, String userEMail);
 
+    /**
+     * Регистрация нового пользователя
+     *
+     * @param userName     имя пользователя
+     * @param userNickname никнэйм пользователя
+     * @param userEMail    адрес электронной почты пользователя
+     *
+     * @return зарегистрированный пользователь
+     */
+    User registerUser(String userName, String userNickname, String userEMail);
 }

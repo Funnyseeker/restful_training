@@ -18,9 +18,9 @@ public interface User {
     void setUserName(String userName);
 
     @FilterFieldGetter(BindKeys.USER_NICKNAME)
-    String getNickname();
+    String getUserNickname();
 
-    void setNickname(String userNickname);
+    void setUserNickname(String userNickname);
 
     @FilterFieldGetter(BindKeys.USER_EMAIL)
     String getUserEMail();

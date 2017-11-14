@@ -6,7 +6,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * Аннотация помечающая "getter" для поля, по которому возможна фильтрация.
+ * Аннотация, помечающая "getter" для поля, по которому возможна фильтрация.
  */
 @Inherited
 @Target(ElementType.METHOD)
