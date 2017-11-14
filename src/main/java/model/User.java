@@ -2,6 +2,10 @@ package model;
 
 import annotation.FilterFieldGetter;
 
+/**
+ * Интерфейс для данных пользователя.
+ * Предоставляет набор "getter"-ов и "setter"-ов.
+ */
 public interface User {
     @FilterFieldGetter(BindKeys.USER_ID)
     int getId();

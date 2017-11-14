@@ -11,6 +11,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * Класс restful сервиса для работы с данными пользователя\пользователей.
+ */
 @Path("/UserService")
 public class UserService {
 

@@ -6,6 +6,10 @@ import model.User;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Класс представляющий пользователя.
+ * Имплементация интерфейса {@link User}
+ */
 @XmlRootElement(name = BindKeys.USER)
 public class UserImpl implements User {
     private int userId;

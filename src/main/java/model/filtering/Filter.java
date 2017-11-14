@@ -3,17 +3,36 @@ package model.filtering;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Абстрактный класс {@link Filter}, основа для фильтрации.
+ */
 public abstract class Filter {
-    private Map<String, Object> filterAttributes;
+    /**
+     * Хранилище для эталонов фильтрации по их ключам.
+     */
+    private Map<String, Object> filterStandards;
 
-    protected Object getFilterAttribute(String attributeKey) {
-        return filterAttributes.get(attributeKey);
+    /**
+     * Полученине эталона для фильтрации по ключу.
+     *
+     * @param standardKey ключ эталона для фильтрации
+     *
+     * @return эталон для фильтрации
+     */
+    protected Object getFilterAttribute(String standardKey) {
+        return filterStandards.get(standardKey);
     }
 
-    public void putFilterAttribute(String attributeKey, Object value) {
-        if (filterAttributes == null) {
-            filterAttributes = new HashMap<>();
+    /**
+     * Задание эталона для фильтрации и его ключа.
+     *
+     * @param standardKey ключ эталона
+     * @param value       эталон
+     */
+    public void putFilterAttribute(String standardKey, Object value) {
+        if (filterStandards == null) {
+            filterStandards = new HashMap<>();
         }
-        filterAttributes.put(attributeKey, value);
+        filterStandards.put(standardKey, value);
     }
 }

@@ -14,30 +14,46 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Класс реализующий {@link UserDao} интерфейс.
+ * Принцип хранения данных основан на загрузке\выгрузке в файл XML формата.
+ */
 public class XMLUserDao implements UserDao {
+    /**
+     * Текущие данные
+     */
     private List<User> userList;
 
-    @Override
-    public User getUserById(int id) {
-        StreamFilter<User> filter = new StreamFilter<>();
-        return null;
-    }
-
-    @Override
-    public List<User> searchUsers(String nickname, String name, String userEMail) {
-        return null;
-    }
-
-    public List<User> getUserList() {
-        if (userList == null) {
-            return loadList();
-        }
-        return userList;
+    public XMLUserDao() {
+        userList = loadList();
     }
 
     /**
-     * Загружает данные из XML файла.
+     * @see UserDao#getUserById(int)
+     */
+    @Override
+    public User getUserById(int userId) {
+        StreamFilter<User> filter = new StreamFilter<>();
+        filter.putFilterAttribute(BindKeys.USER_ID, userId);
+        return userList.stream().filter(filter.getPredicate()).findFirst().get();
+    }
+
+    /**
+     * @see UserDao#searchUsers(String, String, String)
+     */
+    @Override
+    public List<User> searchUsers(String userName, String userNickname, String userEMail) {
+        StreamFilter<User> filter = new StreamFilter<>();
+        filter.putFilterAttribute(BindKeys.USER_NAME, userName);
+        filter.putFilterAttribute(BindKeys.USER_NICKNAME, userNickname);
+        filter.putFilterAttribute(BindKeys.USER_EMAIL, userEMail);
+        return userList.stream().filter(filter.getPredicate()).collect(Collectors.toList());
+    }
+
+    /**
+     * Загружает данных из XML файла.
      *
      * @return userList загруженный из XML файла
      */
