@@ -17,6 +17,13 @@ public class UserService {
     @Autowired
     UserDao userDao;
 
+    /**
+     * Получает пользователя по уникальному идентификатору
+     *
+     * @param userId уникальный идентификатор пользователя
+     *
+     * @return пользователя с заданным идентификатором
+     */
     @GET
     @Path("/{userid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -24,11 +31,20 @@ public class UserService {
         return Response.status(Response.Status.OK).entity(userDao.getUserById(userId)).build();
     }
 
+    /**
+     * Ищет пользователей по списку параметров
+     *
+     * @param nickname никнэйм пользователя
+     * @param name     имя пользователя
+     * @param email    адрес электронной почты пользователя
+     *
+     * @return список пользователей с заданными параметрами
+     */
     @GET
     @Path("/usersearch")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSearchResult(@QueryParam("nickname") String nickname, @QueryParam("name") String name,
-                                   @QueryParam("email") String email) {
+                                    @QueryParam("email") String email) {
         return Response.status(Response.Status.OK).entity(userDao.searchUsers(nickname, name, email)).build();
     }
 }

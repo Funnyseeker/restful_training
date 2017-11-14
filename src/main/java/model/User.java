@@ -3,22 +3,22 @@ package model;
 import annotation.FilterFieldGetter;
 
 public interface User {
-    @FilterFieldGetter("user.id")
+    @FilterFieldGetter(BindKeys.USER_ID)
     int getId();
 
     void setId(int userId);
 
-    @FilterFieldGetter("user.name")
+    @FilterFieldGetter(BindKeys.USER_NAME)
     String getUserName();
 
     void setUserName(String userName);
 
-    @FilterFieldGetter("user.nickname")
+    @FilterFieldGetter(BindKeys.USER_NICKNAME)
     String getNickname();
 
     void setNickname(String userNickname);
 
-    @FilterFieldGetter("user.email")
+    @FilterFieldGetter(BindKeys.USER_EMAIL)
     String getUserEMail();
 
     void setUserEMail(String userEMail);
