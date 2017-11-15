@@ -1,11 +1,10 @@
-package da.xml;
+package fun.trainings.rs.da.xml;
 
-import da.UserDao;
-import model.BindKeys;
-import model.User;
-import model.factories.UserFactory;
-import model.filtering.StreamFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import fun.trainings.rs.da.UserDao;
+import fun.trainings.rs.model.BindKeys;
+import fun.trainings.rs.model.User;
+import fun.trainings.rs.model.factories.UserFactory;
+import fun.trainings.rs.model.filtering.StreamFilter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -19,26 +18,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Класс реализующий {@link UserDao} интерфейс.
+ * Singleton-класс, реализующий {@link UserDao} интерфейс.
  * Принцип хранения данных основан на загрузке\выгрузке в файл XML формата.
  */
 public class XMLUserDao implements UserDao {
 
-    @Autowired
-    UserFactory userFactory;
-
+    private UserFactory userFactory;
     /**
      * Текущие данные
      */
-    private List<User> userList;
-
-    public XMLUserDao() {
-        userList = loadList();
-    }
+    private List<User> userList = null;
 
     /**
      * @see UserDao#getUserById(int)
      */
+
+    public void setUserFactory(UserFactory userFactory) {
+        this.userFactory = userFactory;
+    }
+
     @Override
     public User getUserById(int userId) {
         StreamFilter<User> filter = new StreamFilter<>();

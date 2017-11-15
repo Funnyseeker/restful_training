@@ -1,7 +1,7 @@
-package model.impl;
+package fun.trainings.rs.model.impl;
 
-import model.BindKeys;
-import model.User;
+import fun.trainings.rs.model.BindKeys;
+import fun.trainings.rs.model.User;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

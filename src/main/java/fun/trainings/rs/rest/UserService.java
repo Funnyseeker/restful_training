@@ -1,8 +1,7 @@
-package rest;
+package fun.trainings.rs.rest;
 
-import da.UserDao;
-import model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import fun.trainings.rs.da.UserDao;
+import fun.trainings.rs.model.User;
 import org.springframework.util.StringUtils;
 
 import javax.ws.rs.FormParam;
@@ -16,14 +15,22 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+
 /**
- * Класс restful сервиса для работы с данными пользователя\пользователей.
+ * Класс restful сервиса для работы с данными пользователей.
  */
 @Path("/UserService")
 public class UserService {
+    private UserDao userDao;
 
-    @Autowired
-    UserDao userDao;
+    /**
+     * Setter для DAO объекта пользователей
+     *
+     * @param userDao DAO объект пользователей
+     */
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     /**
      * Получает пользователя по уникальному идентификатору
@@ -49,7 +56,7 @@ public class UserService {
      * @return список пользователей с заданными параметрами
      */
     @GET
-    @Path("/usersearch")
+    @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSearchResult(@FormParam("nickname") String nickname, @FormParam("name") String name,
                                     @FormParam("email") String email) {
@@ -57,7 +64,7 @@ public class UserService {
     }
 
     @PUT
-    @Path("/reguser")
+    @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
     public Response registerUser(@FormParam("nickname") String nickname, @FormParam("name") String name,
                                  @FormParam("email") String email) {

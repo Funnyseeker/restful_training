@@ -1,4 +1,4 @@
-package model.filtering;
+package fun.trainings.rs.model.filtering;
 
 import org.springframework.util.StringUtils;
 

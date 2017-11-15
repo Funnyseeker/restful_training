@@ -1,6 +1,6 @@
-package model.filtering;
+package fun.trainings.rs.model.filtering;
 
-import annotation.FilterFieldGetter;
+import fun.trainings.rs.annotations.FilterFieldGetter;
 
 import java.lang.reflect.Field;
 import java.util.function.Predicate;

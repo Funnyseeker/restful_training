@@ -1,6 +1,6 @@
-package model;
+package fun.trainings.rs.model;
 
-import annotation.FilterFieldGetter;
+import fun.trainings.rs.annotations.FilterFieldGetter;
 
 /**
  * Интерфейс для данных пользователя.

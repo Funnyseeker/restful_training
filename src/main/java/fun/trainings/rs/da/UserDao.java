@@ -1,6 +1,6 @@
-package da;
+package fun.trainings.rs.da;
 
-import model.User;
+import fun.trainings.rs.model.User;
 
 import java.util.List;
 

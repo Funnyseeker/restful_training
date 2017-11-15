@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="simpleUserFactory" class="fun.trainings.rs.model.factories.impl.SimpleUserFactory" scope="singleton"/>
+    <bean id="xmlUserDao" class="fun.trainings.rs.da.xml.XMLUserDao" scope="singleton">
+        <property name="userFactory">
+            <ref bean="simpleUserFactory"/>
+        </property>
+    </bean>
+
+    <!-- A bean definition with initialization method -->
+    <!--<bean id="..." class="..." init-method="...">-->
+    <!--</bean>-->
+
+    <!-- A bean definition with destruction method -->
+    <!--<bean id="..." class="..." destroy-method="...">-->
+    <!--</bean>-->
+
+    <!-- more bean definitions go here -->
+
+</beans>

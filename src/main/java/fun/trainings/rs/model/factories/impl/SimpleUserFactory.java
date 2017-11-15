@@ -1,8 +1,8 @@
-package model.factories.impl;
+package fun.trainings.rs.model.factories.impl;
 
-import model.User;
-import model.factories.UserFactory;
-import model.impl.UserImpl;
+import fun.trainings.rs.model.User;
+import fun.trainings.rs.model.factories.UserFactory;
+import fun.trainings.rs.model.impl.UserImpl;
 import org.springframework.util.StringUtils;
 
 /**

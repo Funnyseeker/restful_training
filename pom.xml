@@ -7,6 +7,7 @@
     <groupId>fun.trainings.rs</groupId>
     <artifactId>restful-training</artifactId>
     <version>1.0.0</version>
+    <packaging>war</packaging>
     <build>
         <plugins>
             <plugin>
@@ -15,6 +16,13 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webXml>src/main/WEB-INF/web.xml</webXml>
                 </configuration>
             </plugin>
         </plugins>
@@ -28,8 +36,13 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
+            <artifactId>spring-context</artifactId>
             <version>5.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.5.1</version>
         </dependency>
     </dependencies>
 
