@@ -5,6 +5,7 @@ import fun.trainings.rs.model.BindKeys;
 import fun.trainings.rs.model.User;
 import fun.trainings.rs.model.factories.UserFactory;
 import fun.trainings.rs.model.filtering.StreamFilter;
+import fun.trainings.rs.model.impl.UserImpl;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -13,6 +14,7 @@ import javax.xml.namespace.QName;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,12 +65,14 @@ public class XMLUserDao implements UserDao {
     public User registerUser(String userName, String userNickname, String userEMail) {
         User user = userFactory.createNew();
         int newUserId = UserFactory.fisrtId;
-        if (userList.size() != 0) {
+        if (userList != null && userList.size() != 0) {
             userList.sort((u1, u2) -> Integer.compare(u1.getId(), u2.getId()));
             newUserId = userList.get(0).getId() + 1;
         }
 
         userFactory.setUserFields(user, newUserId, userName, userNickname, userEMail);
+        userList.add(user);
+        saveList();
         return user;
     }
 
@@ -77,20 +81,21 @@ public class XMLUserDao implements UserDao {
      *
      * @return userList загруженный из XML файла
      */
-    private List<User> loadList() {
+    private void loadList() {
         List<User> userList = new ArrayList<>();
 
         //Создаем поток для чтения из файла
-        try (FileInputStream stream = new FileInputStream("usersxml/userlist.xml")) {
+        URL url = getClass().getClassLoader().getResource("usersxml/userlist.xml");
+        try (FileInputStream stream = new FileInputStream(url.getFile())) {
             // Создаем JAXBContext, который создаст "unmarshaller" для чтения данных из файла
-            JAXBContext context = JAXBContext.newInstance(User.class);
+            JAXBContext context = JAXBContext.newInstance(UserImpl.class);
 
             userList = (List<User>) context.createUnmarshaller().unmarshal(stream);
 
         } catch (IOException | JAXBException e) {
             e.printStackTrace();
         }
-        return userList;
+        this.userList = userList;
     }
 
     /**
@@ -98,14 +103,15 @@ public class XMLUserDao implements UserDao {
      */
     private void saveList() {
         //Создаем поток для записи в файл
-        try (FileOutputStream stream = new FileOutputStream("usersxml/userlist.xml")) {
+        URL url = getClass().getClassLoader().getResource("usersxml/userlist.xml");
+        try (FileOutputStream stream = new FileOutputStream(url.getFile())) {
             for (User user : userList) {
                 // Создаем JAXBContext, который создаст "marshaller" для записи данных в поток
-                JAXBContext context = JAXBContext.newInstance(User.class);
+                JAXBContext context = JAXBContext.newInstance(UserImpl.class);
 
                 // Создаем JAXBElement
                 // Подаем в него объект типа User
-                JAXBElement jaxbElement = new JAXBElement(new QName(BindKeys.USER), User.class, user);
+                JAXBElement jaxbElement = new JAXBElement(new QName(BindKeys.USER), UserImpl.class, user);
 
                 // Маршалим jaxbElement содержащий информацию по данному "user"-у
                 context.createMarshaller().marshal(jaxbElement, stream);

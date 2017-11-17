@@ -50,13 +50,12 @@ public class UserImpl implements User {
     }
 
     @Override
-    @XmlElement(name = BindKeys.USER_NICKNAME)
     public String getUserNickname() {
         return userNickname;
     }
 
     @Override
-    @XmlElement(name = BindKeys.USER_EMAIL)
+    @XmlElement(name = BindKeys.USER_NICKNAME)
     public void setUserNickname(String userNickname) {
         this.userNickname = userNickname;
     }
@@ -67,6 +66,7 @@ public class UserImpl implements User {
     }
 
     @Override
+    @XmlElement(name = BindKeys.USER_EMAIL)
     public void setUserEMail(String userEMail) {
         this.userEMail = userEMail;
     }

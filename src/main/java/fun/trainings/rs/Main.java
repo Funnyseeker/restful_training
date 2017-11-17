@@ -1,14 +1,19 @@
 package fun.trainings.rs;
 
-import fun.trainings.rs.da.UserDao;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import fun.trainings.rs.rest.UserService;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
-public class Main {
+public class Main extends ResourceConfig {
+
+    public Main() {
+        register(RequestContextFilter.class);
+        register(UserService.class);
+        register(JacksonFeature.class);
+    }
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring/beans.xml");
-        context.getBean(UserDao.class);
+//        ApplicationContext context = new ClassPathXmlApplicationContext("spring/beans.xml");
     }
 }
