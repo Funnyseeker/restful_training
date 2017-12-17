@@ -11,8 +11,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 
 
 /**
@@ -40,7 +43,7 @@ public class UserService {
      * @return пользователя с заданным идентификатором
      */
     @GET
-    @Path("/{userid}")
+    @Path("/user_{userid}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("userid") int userId) {
         System.out.println("start getUser()");
@@ -65,17 +68,26 @@ public class UserService {
         return Response.status(Response.Status.OK).entity(userDao.searchUsers(nickname, name, email)).build();
     }
 
+    /**
+     * @param nickname
+     * @param name
+     * @param email
+     *
+     * @return
+     */
     @PUT
     @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
     public Response registerUser(@MatrixParam("nickname") String nickname, @MatrixParam("name") String name,
-                                 @MatrixParam("email") String email) {
+                                 @MatrixParam("email") String email, @Context UriInfo uriInfo) {
         System.out.println("start registerUser()");
         if (!StringUtils.hasText(email)) {
             return Response.noContent().build();
         } else {
             User newUser = userDao.registerUser(nickname, name, email);
-            return Response.status(Response.Status.OK).entity(newUser).build();
+            UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+            builder.replaceMatrix("");
+            return Response.created(builder.build(newUser.getId())).entity(newUser).build();
         }
     }
 }

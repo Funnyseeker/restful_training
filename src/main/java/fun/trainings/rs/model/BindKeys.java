@@ -5,6 +5,7 @@ package fun.trainings.rs.model;
  */
 public class BindKeys {
     public static final String USER = "user";
+    public static final String USERS = "users";
     public static final String USER_ID = "user.id";
     public static final String USER_NAME = "user.name";
     public static final String USER_NICKNAME = "user.nickname";
