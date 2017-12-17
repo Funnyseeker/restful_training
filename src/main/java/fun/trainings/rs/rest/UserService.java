@@ -46,7 +46,6 @@ public class UserService {
     @Path("/user_{userid}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("userid") int userId) {
-        System.out.println("start getUser()");
         return Response.status(Response.Status.OK).entity(userDao.getUserById(userId)).build();
     }
 
@@ -64,7 +63,6 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSearchResult(@MatrixParam("nickname") String nickname, @MatrixParam("name") String name,
                                     @MatrixParam("email") String email) {
-        System.out.println("start getSearchResult()");
         return Response.status(Response.Status.OK).entity(userDao.searchUsers(nickname, name, email)).build();
     }
 
@@ -80,7 +78,6 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response registerUser(@MatrixParam("nickname") String nickname, @MatrixParam("name") String name,
                                  @MatrixParam("email") String email, @Context UriInfo uriInfo) {
-        System.out.println("start registerUser()");
         if (!StringUtils.hasText(email)) {
             return Response.noContent().build();
         } else {
