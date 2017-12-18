@@ -39,4 +39,21 @@ public interface UserDao {
      * @return зарегистрированный пользователь
      */
     User registerUser(String userName, String userNickname, String userEMail);
+
+    /**
+     * Обновляет данные пользователя с указанным уникальным идентификатором
+     *
+     * @param userId       уникальный идентификатор пользователя
+     * @param userName     имя пользователя
+     * @param userNickname никнэйм пользователя
+     * @param userEMail    адрес электронной почты пользователя
+     */
+    void updateUser(int userId, String userName, String userNickname, String userEMail);
+
+    /**
+     * Удаляет пользователя с заданным уникальным идентификатором
+     *
+     * @param userId уникальный идентификатор пользователя
+     */
+    void deleteUser(int userId);
 }

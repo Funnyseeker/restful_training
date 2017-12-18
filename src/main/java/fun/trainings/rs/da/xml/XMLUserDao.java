@@ -83,6 +83,31 @@ public class XMLUserDao implements UserDao {
     }
 
     /**
+     * @see UserDao#updateUser(int, String, String, String)
+     */
+    @Override
+    public void updateUser(int userId, String userName, String userNickname, String userEMail) {
+        User user = getUserById(userId);
+        userFactory.setUserFields(user, userId, userName, userNickname, userEMail);
+        userList.replaceAll(userInList -> {
+            if (userInList.getId() == userId) {
+                return user;
+            }
+            return userInList;
+        });
+        saveList();
+    }
+
+    /**
+     * @see UserDao#deleteUser(int)
+     */
+    @Override
+    public void deleteUser(int userId) {
+        getUserList().remove(getUserById(userId));
+        saveList();
+    }
+
+    /**
      * Загружает данных из XML файла.
      *
      * @return userList загруженный из XML файла
