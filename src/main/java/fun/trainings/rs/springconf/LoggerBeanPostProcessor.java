@@ -1,9 +1,9 @@
-package fun.trainings.rs.springpost;
+package fun.trainings.rs.springconf;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
-public class SimpleLoggingPostProcessor implements BeanPostProcessor {
+public class LoggerBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName)
             throws BeansException {
 

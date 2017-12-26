@@ -1,5 +1,6 @@
 package fun.trainings.rs.model.impl;
 
+import fun.trainings.rs.annotations.FilterFieldGetter;
 import fun.trainings.rs.model.BindKeys;
 import fun.trainings.rs.model.User;
 
@@ -11,16 +12,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Имплементация интерфейса {@link User}
  */
 @XmlRootElement(name = BindKeys.USER)
-public class UserImpl implements User {
+public class XMLUserImpl implements User {
     private int userId;
     private String userName;
     private String userNickname;
     private String userEMail;
 
-    public UserImpl() {
+    public XMLUserImpl() {
     }
 
-    public UserImpl(int userId, String userName, String userNickname, String userEMail) {
+    public XMLUserImpl(int userId, String userName, String userNickname, String userEMail) {
         this.userId = userId;
         this.userName = userName;
         this.userNickname = userNickname;
@@ -28,6 +29,7 @@ public class UserImpl implements User {
     }
 
     @Override
+    @FilterFieldGetter(BindKeys.USER_ID)
     public int getId() {
         return userId;
     }
@@ -39,6 +41,7 @@ public class UserImpl implements User {
     }
 
     @Override
+    @FilterFieldGetter(BindKeys.USER_NAME)
     public String getUserName() {
         return userName;
     }
@@ -50,6 +53,7 @@ public class UserImpl implements User {
     }
 
     @Override
+    @FilterFieldGetter(BindKeys.USER_NICKNAME)
     public String getUserNickname() {
         return userNickname;
     }
@@ -61,6 +65,7 @@ public class UserImpl implements User {
     }
 
     @Override
+    @FilterFieldGetter(BindKeys.USER_EMAIL)
     public String getUserEMail() {
         return userEMail;
     }

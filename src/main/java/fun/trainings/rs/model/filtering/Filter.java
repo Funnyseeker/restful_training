@@ -12,7 +12,8 @@ public abstract class Filter {
     /**
      * Хранилище для эталонов фильтрации по их ключам.
      */
-    private Map<String, Object> filterStandards;
+    protected Map<String, Object> filterStandards = new HashMap<>();
+    ;
 
     /**
      * Полученине эталона для фильтрации по ключу.
@@ -32,9 +33,6 @@ public abstract class Filter {
      * @param value       эталон
      */
     public void putFilterAttribute(String standardKey, Object value) {
-        if (filterStandards == null) {
-            filterStandards = new HashMap<>();
-        }
         if (value == null ||
                 (value instanceof String && !StringUtils.hasText((String) value))) {
             return;

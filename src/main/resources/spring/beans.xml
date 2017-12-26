@@ -3,28 +3,56 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean class="fun.trainings.rs.springpost.SimpleLoggingPostProcessor"/>
-    <bean id="simpleUserFactory" class="fun.trainings.rs.model.factories.impl.SimpleUserFactory" scope="singleton"/>
+    <!--XML beans-->
+    <bean class="fun.trainings.rs.springconf.LoggerBeanPostProcessor"/>
+    <bean id="xmlUserFactory" class="fun.trainings.rs.model.factories.impl.XMLUserFactory" scope="singleton"/>
     <bean id="xmlUserDao" class="fun.trainings.rs.da.xml.XMLUserDao" scope="singleton" init-method="loadList"
           destroy-method="saveList">
         <property name="userFactory">
-            <ref bean="simpleUserFactory"/>
+            <ref bean="xmlUserFactory"/>
         </property>
     </bean>
+
+    <!--Hibernate beans-->
+    <!--<bean id="dataSource"-->
+    <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <!--<property name="driverClassName" value="org.postgresql.Driver"/>-->
+    <!--<property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>-->
+    <!--<property name="username" value="postgres"/>-->
+    <!--<property name="password" value="160494"/>-->
+    <!--&lt;!&ndash;<property name="schema" value="rest"/>&ndash;&gt;-->
+    <!--</bean>-->
+    <!--<bean id="hibernateLocalSessionFactory"-->
+    <!--class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">-->
+    <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--<property name="annotatedClasses">-->
+    <!--<list>-->
+    <!--<value>fun.trainings.rs.model.impl.EntityUserImpl</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--<property name="hibernateProperties">-->
+    <!--<props>-->
+    <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>-->
+    <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+    <!--<prop key="hibernate.show_sql">true</prop>-->
+    <!--</props>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="entityUserFactory" class="fun.trainings.rs.model.factories.impl.EntityUserFactory" scope="singleton"/>-->
+    <!--<bean id="hibernateUserDao" class="fun.trainings.rs.da.db.HibernateUserDao" scope="singleton">-->
+    <!--<property name="sessionFactory">-->
+    <!--<ref bean="hibernateLocalSessionFactory"/>-->
+    <!--</property>-->
+    <!--<property name="userFactory">-->
+    <!--<ref bean="entityUserFactory"/>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+    <!--REST-ful service bean-->
     <bean id="userService" class="fun.trainings.rs.rest.UserService" scope="singleton">
         <property name="userDao">
             <ref bean="xmlUserDao"/>
+            <!--<ref bean="hibernateUserDao"/>-->
         </property>
     </bean>
-
-    <!-- A bean definition with initialization method -->
-    <!--<bean id="..." class="..." init-method="...">-->
-    <!--</bean>-->
-
-    <!-- A bean definition with destruction method -->
-    <!--<bean id="..." class="..." destroy-method="...">-->
-    <!--</bean>-->
-
-    <!-- more bean definitions go here -->
-
 </beans>

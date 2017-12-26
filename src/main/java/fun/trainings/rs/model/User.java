@@ -7,7 +7,6 @@ import fun.trainings.rs.annotations.FilterFieldGetter;
  * Предоставляет набор "getter"-ов и "setter"-ов.
  */
 public interface User {
-    @FilterFieldGetter(BindKeys.USER_ID)
     int getId();
 
     void setId(int userId);

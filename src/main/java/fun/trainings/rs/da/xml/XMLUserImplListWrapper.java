@@ -2,7 +2,7 @@ package fun.trainings.rs.da.xml;
 
 import fun.trainings.rs.model.BindKeys;
 import fun.trainings.rs.model.User;
-import fun.trainings.rs.model.impl.UserImpl;
+import fun.trainings.rs.model.impl.XMLUserImpl;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,10 +14,10 @@ import java.util.List;
  * Нужен для задания уникального корневого тега в xml файле.
  */
 @XmlRootElement(name = BindKeys.USERS)
-public class UserImplListWrapper {
+public class XMLUserImplListWrapper {
 
-    @XmlElement(name = BindKeys.USER, type = UserImpl.class)
-    private List<UserImpl> userList = null;
+    @XmlElement(name = BindKeys.USER, type = XMLUserImpl.class)
+    private List<XMLUserImpl> userList = null;
 
     public List<? extends User> getUserList() {
         return userList;
@@ -26,7 +26,7 @@ public class UserImplListWrapper {
     public void setUserList(List<User> userList) {
         this.userList = new ArrayList<>();
         for (User user : userList) {
-            UserImpl impl = (UserImpl) user;
+            XMLUserImpl impl = (XMLUserImpl) user;
             if (impl != null) {
                 this.userList.add(impl);
             }

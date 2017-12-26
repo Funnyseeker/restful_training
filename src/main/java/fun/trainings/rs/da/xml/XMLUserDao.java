@@ -119,9 +119,9 @@ public class XMLUserDao implements UserDao {
         URL url = getClass().getClassLoader().getResource("usersxml/userlist.xml");
         try (FileInputStream stream = new FileInputStream(url.getFile())) {
             // Создаем JAXBContext, который создаст "unmarshaller" для чтения данных из файла
-            JAXBContext context = JAXBContext.newInstance(UserImplListWrapper.class);
+            JAXBContext context = JAXBContext.newInstance(XMLUserImplListWrapper.class);
 
-            userList = (List<User>) ((UserImplListWrapper) context.createUnmarshaller().unmarshal(stream))
+            userList = (List<User>) ((XMLUserImplListWrapper) context.createUnmarshaller().unmarshal(stream))
                     .getUserList();
 
         } catch (IOException | JAXBException e) {
@@ -138,14 +138,14 @@ public class XMLUserDao implements UserDao {
         URL url = getClass().getClassLoader().getResource("usersxml/userlist.xml");
         try (FileOutputStream stream = new FileOutputStream(url.getFile())) {
             // Создаем JAXBContext, который создаст "marshaller" для записи данных в поток
-            JAXBContext context = JAXBContext.newInstance(UserImplListWrapper.class);
+            JAXBContext context = JAXBContext.newInstance(XMLUserImplListWrapper.class);
 
-            UserImplListWrapper wrapper = new UserImplListWrapper();
+            XMLUserImplListWrapper wrapper = new XMLUserImplListWrapper();
             wrapper.setUserList(userList);
 
             // Создаем JAXBElement
             // Подаем в него враппер для списка объектов типа User
-            JAXBElement jaxbElement = new JAXBElement(new QName(BindKeys.USERS), UserImplListWrapper.class,
+            JAXBElement jaxbElement = new JAXBElement(new QName(BindKeys.USERS), XMLUserImplListWrapper.class,
                                                       wrapper);
 
             // Маршалим jaxbElement содержащий информацию по данному "user"-у

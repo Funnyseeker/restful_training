@@ -2,7 +2,8 @@ package fun.trainings.rs.model.filtering;
 
 import fun.trainings.rs.annotations.FilterFieldGetter;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.function.Predicate;
 
 /**
@@ -24,14 +25,16 @@ public class StreamFilter<T> extends Filter {
      */
     public StreamFilter<T> buildPredicate() {
         predicate = user -> {
-            for (Field field : user.getClass().getFields()) {
-                FilterFieldGetter ffg = field.getAnnotation(FilterFieldGetter.class);
+            for (Method method : user.getClass().getMethods()) {
+                FilterFieldGetter ffg = method.getAnnotation(FilterFieldGetter.class);
                 if (ffg != null && getFilterAttribute(ffg.value()) != null) {
                     try {
-                        if (!compareObjects(field.get(user), getFilterAttribute(ffg.value()))) {
+                        Object object = method.invoke(user);
+//                        field.get(user)
+                        if (!compareObjects(object, getFilterAttribute(ffg.value()))) {
                             return false;
                         }
-                    } catch (IllegalAccessException e) {
+                    } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                         return false;
                     }
@@ -64,6 +67,6 @@ public class StreamFilter<T> extends Filter {
         if (object1 instanceof String && object2 instanceof String) {
             return object1.equals(object2);
         }
-        return object1 == object2;
+        return object1.equals(object2);
     }
 }
