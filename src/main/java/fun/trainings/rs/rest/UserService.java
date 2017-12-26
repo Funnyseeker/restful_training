@@ -88,7 +88,7 @@ public class UserService {
         } else {
             User newUser = userDao.registerUser(name, nickname, email);
             UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-            String newPath = uriInfo.getPath().replace("/register", "_" + newUser.getId());
+            String newPath = uriInfo.getPath().replace("/register", "/user_" + newUser.getId());
             builder = builder.replacePath(newPath);
             builder = builder.replaceMatrix("");
             return Response.created(builder.build()).build();

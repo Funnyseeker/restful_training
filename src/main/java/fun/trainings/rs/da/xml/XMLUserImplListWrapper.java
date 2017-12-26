@@ -1,6 +1,6 @@
 package fun.trainings.rs.da.xml;
 
-import fun.trainings.rs.model.BindKeys;
+import fun.trainings.rs.model.XMLBindKeys;
 import fun.trainings.rs.model.User;
 import fun.trainings.rs.model.impl.XMLUserImpl;
 
@@ -13,10 +13,10 @@ import java.util.List;
  * Класс-обертка для списка объектов типа {@link User}.
  * Нужен для задания уникального корневого тега в xml файле.
  */
-@XmlRootElement(name = BindKeys.USERS)
+@XmlRootElement(name = XMLBindKeys.USERS)
 public class XMLUserImplListWrapper {
 
-    @XmlElement(name = BindKeys.USER, type = XMLUserImpl.class)
+    @XmlElement(name = XMLBindKeys.USER, type = XMLUserImpl.class)
     private List<XMLUserImpl> userList = null;
 
     public List<? extends User> getUserList() {

@@ -1,5 +1,6 @@
 package fun.trainings.rs.model.impl;
 
+import fun.trainings.rs.model.HibernateBindKeys;
 import fun.trainings.rs.model.User;
 
 import javax.persistence.Column;
@@ -11,22 +12,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"USERS\"", schema = "rest")
+@Table(name = HibernateBindKeys.USERS_TAB)
 public class EntityUserImpl implements User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_gen")
     @SequenceGenerator(name = "user_id_gen", sequenceName = "user_id_seq", allocationSize = 1)
-    @Column(name = "\"ID\"", updatable = false, nullable = false)
+    @Column(name = HibernateBindKeys.USER_ID_COL, updatable = false, nullable = false)
     private int userId;
 
-    @Column(name = "\"USERNAME\"")
+    @Column(name = HibernateBindKeys.USER_NAME_COL)
     private String userName;
 
-    @Column(name = "\"USERNICKNAME\"")
+    @Column(name = HibernateBindKeys.USER_NICKNAME_COL)
     private String userNickname;
 
-    @Column(name = "\"USEREMAIL\"")
+    @Column(name = HibernateBindKeys.USER_EMAIL_COL)
     private String userEMail;
 
     @Override

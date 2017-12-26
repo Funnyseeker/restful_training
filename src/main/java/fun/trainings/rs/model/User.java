@@ -11,17 +11,17 @@ public interface User {
 
     void setId(int userId);
 
-    @FilterFieldGetter(BindKeys.USER_NAME)
+    @FilterFieldGetter(XMLBindKeys.USER_NAME)
     String getUserName();
 
     void setUserName(String userName);
 
-    @FilterFieldGetter(BindKeys.USER_NICKNAME)
+    @FilterFieldGetter(XMLBindKeys.USER_NICKNAME)
     String getUserNickname();
 
     void setUserNickname(String userNickname);
 
-    @FilterFieldGetter(BindKeys.USER_EMAIL)
+    @FilterFieldGetter(XMLBindKeys.USER_EMAIL)
     String getUserEMail();
 
     void setUserEMail(String userEMail);

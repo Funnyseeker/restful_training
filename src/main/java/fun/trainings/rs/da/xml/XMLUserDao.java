@@ -1,7 +1,7 @@
 package fun.trainings.rs.da.xml;
 
 import fun.trainings.rs.da.UserDao;
-import fun.trainings.rs.model.BindKeys;
+import fun.trainings.rs.model.XMLBindKeys;
 import fun.trainings.rs.model.User;
 import fun.trainings.rs.model.factories.UserFactory;
 import fun.trainings.rs.model.filtering.StreamFilter;
@@ -48,7 +48,7 @@ public class XMLUserDao implements UserDao {
     @Override
     public User getUserById(int userId) {
         StreamFilter<User> filter = new StreamFilter<>();
-        filter.putFilterAttribute(BindKeys.USER_ID, userId);
+        filter.putFilterAttribute(XMLBindKeys.USER_ID, userId);
         return userList.stream().filter(filter.getPredicate()).findFirst().get();
     }
 
@@ -58,9 +58,9 @@ public class XMLUserDao implements UserDao {
     @Override
     public List<User> searchUsers(String userName, String userNickname, String userEMail) {
         StreamFilter<User> filter = new StreamFilter<>();
-        filter.putFilterAttribute(BindKeys.USER_NAME, userName);
-        filter.putFilterAttribute(BindKeys.USER_NICKNAME, userNickname);
-        filter.putFilterAttribute(BindKeys.USER_EMAIL, userEMail);
+        filter.putFilterAttribute(XMLBindKeys.USER_NAME, userName);
+        filter.putFilterAttribute(XMLBindKeys.USER_NICKNAME, userNickname);
+        filter.putFilterAttribute(XMLBindKeys.USER_EMAIL, userEMail);
         return userList.stream().filter(filter.getPredicate()).collect(Collectors.toList());
     }
 
@@ -145,7 +145,7 @@ public class XMLUserDao implements UserDao {
 
             // Создаем JAXBElement
             // Подаем в него враппер для списка объектов типа User
-            JAXBElement jaxbElement = new JAXBElement(new QName(BindKeys.USERS), XMLUserImplListWrapper.class,
+            JAXBElement jaxbElement = new JAXBElement(new QName(XMLBindKeys.USERS), XMLUserImplListWrapper.class,
                                                       wrapper);
 
             // Маршалим jaxbElement содержащий информацию по данному "user"-у

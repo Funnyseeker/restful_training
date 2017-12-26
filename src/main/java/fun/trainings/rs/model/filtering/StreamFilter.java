@@ -12,7 +12,7 @@ import java.util.function.Predicate;
  *
  * @param <T> тип объектов в потоке
  */
-public class StreamFilter<T> extends Filter {
+public final class StreamFilter<T> extends Filter {
     /**
      * Предикат для фильтрации.
      */

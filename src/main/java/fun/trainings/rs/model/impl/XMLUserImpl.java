@@ -1,7 +1,7 @@
 package fun.trainings.rs.model.impl;
 
 import fun.trainings.rs.annotations.FilterFieldGetter;
-import fun.trainings.rs.model.BindKeys;
+import fun.trainings.rs.model.XMLBindKeys;
 import fun.trainings.rs.model.User;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Класс представляющий пользователя.
  * Имплементация интерфейса {@link User}
  */
-@XmlRootElement(name = BindKeys.USER)
+@XmlRootElement(name = XMLBindKeys.USER)
 public class XMLUserImpl implements User {
     private int userId;
     private String userName;
@@ -29,49 +29,49 @@ public class XMLUserImpl implements User {
     }
 
     @Override
-    @FilterFieldGetter(BindKeys.USER_ID)
+    @FilterFieldGetter(XMLBindKeys.USER_ID)
     public int getId() {
         return userId;
     }
 
     @Override
-    @XmlElement(name = BindKeys.USER_ID, required = true)
+    @XmlElement(name = XMLBindKeys.USER_ID, required = true)
     public void setId(int userId) {
         this.userId = userId;
     }
 
     @Override
-    @FilterFieldGetter(BindKeys.USER_NAME)
+    @FilterFieldGetter(XMLBindKeys.USER_NAME)
     public String getUserName() {
         return userName;
     }
 
     @Override
-    @XmlElement(name = BindKeys.USER_NAME)
+    @XmlElement(name = XMLBindKeys.USER_NAME)
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
     @Override
-    @FilterFieldGetter(BindKeys.USER_NICKNAME)
+    @FilterFieldGetter(XMLBindKeys.USER_NICKNAME)
     public String getUserNickname() {
         return userNickname;
     }
 
     @Override
-    @XmlElement(name = BindKeys.USER_NICKNAME)
+    @XmlElement(name = XMLBindKeys.USER_NICKNAME)
     public void setUserNickname(String userNickname) {
         this.userNickname = userNickname;
     }
 
     @Override
-    @FilterFieldGetter(BindKeys.USER_EMAIL)
+    @FilterFieldGetter(XMLBindKeys.USER_EMAIL)
     public String getUserEMail() {
         return userEMail;
     }
 
     @Override
-    @XmlElement(name = BindKeys.USER_EMAIL)
+    @XmlElement(name = XMLBindKeys.USER_EMAIL)
     public void setUserEMail(String userEMail) {
         this.userEMail = userEMail;
     }
