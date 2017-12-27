@@ -20,7 +20,7 @@
 
 #IDE files
 .idea/
-.iml
+*.iml
 
 #Target files
 target/
