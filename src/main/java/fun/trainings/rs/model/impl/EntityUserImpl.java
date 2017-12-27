@@ -30,6 +30,9 @@ public class EntityUserImpl implements User {
     @Column(name = HibernateBindKeys.USER_EMAIL_COL)
     private String userEMail;
 
+    @Column(name = HibernateBindKeys.USER_PASSWORD_COL)
+    private String userPassword;
+
     @Override
     public int getId() {
         return userId;
@@ -68,5 +71,15 @@ public class EntityUserImpl implements User {
     @Override
     public void setUserEMail(String userEMail) {
         this.userEMail = userEMail;
+    }
+
+    @Override
+    public String getPassword() {
+        return userPassword;
+    }
+
+    @Override
+    public void setPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 }

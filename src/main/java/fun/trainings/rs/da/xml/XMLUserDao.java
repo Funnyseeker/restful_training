@@ -1,8 +1,8 @@
 package fun.trainings.rs.da.xml;
 
 import fun.trainings.rs.da.UserDao;
-import fun.trainings.rs.model.XMLBindKeys;
 import fun.trainings.rs.model.User;
+import fun.trainings.rs.model.XMLBindKeys;
 import fun.trainings.rs.model.factories.UserFactory;
 import fun.trainings.rs.model.filtering.StreamFilter;
 
@@ -65,10 +65,10 @@ public class XMLUserDao implements UserDao {
     }
 
     /**
-     * @see UserDao#registerUser(String, String, String)
+     * @see UserDao#registerUser(String, String, String, String)
      */
     @Override
-    public User registerUser(String userName, String userNickname, String userEMail) {
+    public User registerUser(String password, String userName, String userNickname, String userEMail) {
         User user = userFactory.createNew();
         int newUserId = UserFactory.fisrtId;
         if (getUserList().size() != 0) {
@@ -76,7 +76,7 @@ public class XMLUserDao implements UserDao {
             newUserId = userList.get(userList.size() - 1).getId() + 1;
         }
 
-        userFactory.setUserFields(user, newUserId, userName, userNickname, userEMail);
+        userFactory.setUserFields(user, newUserId, password, userName, userNickname, userEMail);
         getUserList().add(user);
         saveList();
         return user;
@@ -88,7 +88,7 @@ public class XMLUserDao implements UserDao {
     @Override
     public void updateUser(int userId, String userName, String userNickname, String userEMail) {
         User user = getUserById(userId);
-        userFactory.setUserFields(user, userId, userName, userNickname, userEMail);
+        userFactory.setUserFields(user, userId, null, userName, userNickname, userEMail);
         userList.replaceAll(userInList -> {
             if (userInList.getId() == userId) {
                 return user;

@@ -1,15 +1,3 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <users>
-    <user>
-        <user.id>1</user.id>
-        <user.email>ololo@mail.com</user.email>
-        <user.name>Test1</user.name>
-        <user.nickname>Test1</user.nickname>
-    </user>
-    <user>
-        <user.id>2</user.id>
-        <user.email>test2@mail.com</user.email>
-        <user.name>Test2</user.name>
-        <user.nickname>Test2</user.nickname>
-    </user>
 </users>

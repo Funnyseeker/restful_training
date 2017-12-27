@@ -12,7 +12,11 @@ public class EntityUserFactory implements UserFactory {
     }
 
     @Override
-    public void setUserFields(User user, Integer userId, String userName, String userNickname, String userEMail) {
+    public void setUserFields(User user, Integer userId, String password, String userName, String userNickname,
+                              String userEMail) {
+        if (StringUtils.hasText(password)) {
+            user.setPassword(password);
+        }
         if (StringUtils.hasText(userName)) {
             user.setUserName(userName);
         }

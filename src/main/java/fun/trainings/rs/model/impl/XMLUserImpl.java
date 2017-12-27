@@ -1,8 +1,8 @@
 package fun.trainings.rs.model.impl;
 
 import fun.trainings.rs.annotations.FilterFieldGetter;
-import fun.trainings.rs.model.XMLBindKeys;
 import fun.trainings.rs.model.User;
+import fun.trainings.rs.model.XMLBindKeys;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,6 +17,7 @@ public class XMLUserImpl implements User {
     private String userName;
     private String userNickname;
     private String userEMail;
+    private String userPassword;
 
     public XMLUserImpl() {
     }
@@ -74,5 +75,16 @@ public class XMLUserImpl implements User {
     @XmlElement(name = XMLBindKeys.USER_EMAIL)
     public void setUserEMail(String userEMail) {
         this.userEMail = userEMail;
+    }
+
+    @Override
+    public String getPassword() {
+        return userPassword;
+    }
+
+    @Override
+    @XmlElement(name = XMLBindKeys.USER_PASSWORD)
+    public void setPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 }

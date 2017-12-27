@@ -25,4 +25,8 @@ public interface User {
     String getUserEMail();
 
     void setUserEMail(String userEMail);
+
+    String getPassword();
+
+    void setPassword(String userPassword);
 }

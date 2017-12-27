@@ -19,12 +19,16 @@ public class XMLUserFactory implements UserFactory {
     }
 
     /**
-     * @see UserFactory#setUserFields(User, Integer, String, String, String)
+     * @see UserFactory#setUserFields(User, Integer, String, String, String, String)
      */
     @Override
-    public void setUserFields(User user, Integer userId, String userName, String userNickname, String userEMail) {
+    public void setUserFields(User user, Integer userId, String password, String userName, String userNickname,
+                              String userEMail) {
         if (userId != null) {
             user.setId(userId);
+        }
+        if (StringUtils.hasText(password)) {
+            user.setPassword(password);
         }
         if (StringUtils.hasText(userName)) {
             user.setUserName(userName);

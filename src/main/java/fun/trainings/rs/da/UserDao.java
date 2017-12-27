@@ -32,13 +32,14 @@ public interface UserDao {
     /**
      * Регистрация нового пользователя
      *
+     * @param password     хэш пароля пользователя
      * @param userName     имя пользователя
      * @param userNickname никнэйм пользователя
      * @param userEMail    адрес электронной почты пользователя
      *
      * @return зарегистрированный пользователь
      */
-    User registerUser(String userName, String userNickname, String userEMail);
+    User registerUser(String password, String userName, String userNickname, String userEMail);
 
     /**
      * Обновляет данные пользователя с указанным уникальным идентификатором

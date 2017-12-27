@@ -1,7 +1,9 @@
 package fun.trainings.rs.rest;
 
+import fun.trainings.rs.annotations.Secured;
 import fun.trainings.rs.da.UserDao;
 import fun.trainings.rs.model.User;
+import fun.trainings.rs.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -23,7 +25,7 @@ import javax.ws.rs.core.UriInfo;
 /**
  * Класс restful сервиса для работы с данными пользователей.
  */
-@Path("/UserService")
+@Path("/userservice")
 public class UserService {
     @Autowired
     private UserDao userDao;
@@ -44,6 +46,7 @@ public class UserService {
      *
      * @return пользователя с заданным идентификатором
      */
+
     @GET
     @Path("/user_{userid}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -81,12 +84,13 @@ public class UserService {
     @PUT
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response registerUser(@MatrixParam("name") String name, @MatrixParam("nickname") String nickname,
+    public Response registerUser(@MatrixParam("password") String password, @MatrixParam("name") String name,
+                                 @MatrixParam("nickname") String nickname,
                                  @MatrixParam("email") String email, @Context UriInfo uriInfo) {
         if (!StringUtils.hasText(email)) {
-            return Response.noContent().build();
+            return Response.serverError().build();
         } else {
-            User newUser = userDao.registerUser(name, nickname, email);
+            User newUser = userDao.registerUser(PasswordUtil.getHash(password), name, nickname, email);
             UriBuilder builder = uriInfo.getAbsolutePathBuilder();
             String newPath = uriInfo.getPath().replace("/register", "/user_" + newUser.getId());
             builder = builder.replacePath(newPath);
@@ -105,6 +109,7 @@ public class UserService {
      *
      * @return положительный ответ с обновленным пользователем
      */
+    @Secured
     @POST
     @Path("/user_{userid}/update")
     @Produces(MediaType.APPLICATION_JSON)
@@ -115,6 +120,7 @@ public class UserService {
         return Response.ok().entity(userDao.getUserById(userId)).build();
     }
 
+    @Secured
     @DELETE
     @Path("/user_{userid}/delete")
     public Response deleteUser(@PathParam("userid") int userId) {

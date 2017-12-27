@@ -4,7 +4,7 @@
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <!--XML beans-->
-    <!--<bean class="fun.trainings.rs.springconf.LoggerBeanPostProcessor"/>-->
+    <!--<bean class="fun.trainings.rs.springgerBeanPostProcessor"/>-->
     <!--<bean id="xmlUserFactory" class="fun.trainings.rs.model.factories.impl.XMLUserFactory" scope="singleton"/>-->
     <!--<bean id="xmlUserDao" class="fun.trainings.rs.da.xml.XMLUserDao" scope="singleton" init-method="loadList"-->
     <!--destroy-method="saveList">-->

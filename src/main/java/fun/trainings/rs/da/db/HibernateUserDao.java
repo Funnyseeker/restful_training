@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,9 @@ public class HibernateUserDao implements UserDao {
         this.userFactory = userFactory;
     }
 
+    /**
+     * @see UserDao#getUserById(int)
+     */
     @Override
     public User getUserById(int userId) {
         Session session = this.sessionFactory.openSession();
@@ -53,14 +57,17 @@ public class HibernateUserDao implements UserDao {
         return user;
     }
 
+    /**
+     * @see UserDao#searchUsers(String, String, String)
+     */
     @Override
     public List<User> searchUsers(String userName, String userNickname, String userEMail) {
         Session session = this.sessionFactory.openSession();
         List<? extends User> users = null;
         try {
             Transaction tx = session.beginTransaction();
-            HQLFilter<EntityUserImpl> filter = new HQLFilter(EntityUserImpl.class,
-                                                             sessionFactory.getCriteriaBuilder());
+            HQLFilter<EntityUserImpl> filter = new HQLFilter<>(EntityUserImpl.class,
+                                                               sessionFactory.getCriteriaBuilder());
             filter.putFilterAttribute(HibernateBindKeys.USER_NAME_COL, userName);
             filter.putFilterAttribute(HibernateBindKeys.USER_NICKNAME_COL, userNickname);
             filter.putFilterAttribute(HibernateBindKeys.USER_EMAIL_COL, userEMail);
@@ -74,13 +81,17 @@ public class HibernateUserDao implements UserDao {
         } finally {
             session.close();
         }
-        return users.stream().map(elem -> (User) elem).collect(Collectors.toList());
+        return users != null ? users.stream().map(elem -> (User) elem).collect(Collectors.toList())
+                : Collections.emptyList();
     }
 
+    /**
+     * @see UserDao#registerUser(String, String, String, String)
+     */
     @Override
-    public User registerUser(String userName, String userNickname, String userEMail) {
+    public User registerUser(String password, String userName, String userNickname, String userEMail) {
         User user = userFactory.createNew();
-        userFactory.setUserFields(user, null, userName, userNickname, userEMail);
+        userFactory.setUserFields(user, null, password, userName, userNickname, userEMail);
         Session session = this.sessionFactory.openSession();
         try {
             Transaction tx = session.beginTransaction();
@@ -97,6 +108,9 @@ public class HibernateUserDao implements UserDao {
         return user;
     }
 
+    /**
+     * @see UserDao#updateUser(int, String, String, String)
+     */
     @Override
     public void updateUser(int userId, String userName, String userNickname, String userEMail) {
         Session session = this.sessionFactory.openSession();
@@ -120,6 +134,9 @@ public class HibernateUserDao implements UserDao {
         }
     }
 
+    /**
+     * @see UserDao#deleteUser(int)
+     */
     @Override
     public void deleteUser(int userId) {
         Session session = this.sessionFactory.openSession();
