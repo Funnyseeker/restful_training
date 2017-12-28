@@ -31,7 +31,7 @@ public final class StreamFilter<T> extends Filter {
                     try {
                         Object object = method.invoke(user);
 //                        field.get(user)
-                        if (!compareObjects(object, getFilterAttribute(ffg.value()))) {
+                        if (object.equals(getFilterAttribute(ffg.value()))) {
                             return false;
                         }
                     } catch (IllegalAccessException | InvocationTargetException e) {
@@ -52,21 +52,5 @@ public final class StreamFilter<T> extends Filter {
      */
     public Predicate<T> getPredicate() {
         return predicate == null ? buildPredicate().getPredicate() : predicate;
-    }
-
-    /**
-     * Сравнивает фильтруемое поле с полем в объекте.
-     * Для строковых объектов использует {@link Object#equals(Object)}
-     *
-     * @param object1 первый объект для сравнения
-     * @param object2 второй объект для сравнения
-     *
-     * @return true если объекты равны, иначе else
-     */
-    private boolean compareObjects(Object object1, Object object2) {
-        if (object1 instanceof String && object2 instanceof String) {
-            return object1.equals(object2);
-        }
-        return object1.equals(object2);
     }
 }

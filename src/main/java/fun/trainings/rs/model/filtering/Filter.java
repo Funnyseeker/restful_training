@@ -1,7 +1,5 @@
 package fun.trainings.rs.model.filtering;
 
-import org.springframework.util.StringUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,9 +30,10 @@ public abstract class Filter {
      * @param standardKey ключ эталона
      * @param value       эталон
      */
+
     public void putFilterAttribute(String standardKey, Object value) {
-        if (value == null ||
-                (value instanceof String && !StringUtils.hasText((String) value))) {
+        if (value == null) {
+            //TODO: throw an exception
             return;
         }
         filterStandards.put(standardKey, value);

@@ -1,7 +1,7 @@
 package fun.trainings.rs.model;
 
 /**
- * Класс хранящий различные ключи, которые могут быть использованы для уникальной идентификации.
+ * Класс хранящий ключи, которые могут быть использованы в качестве xml тэгов.
  */
 public class XMLBindKeys {
     public static final String USER = "user";

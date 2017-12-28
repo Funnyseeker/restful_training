@@ -119,9 +119,9 @@ public class HibernateUserDao implements UserDao {
             HQLFilter<EntityUserImpl> filter = new HQLFilter<>(EntityUserImpl.class,
                                                                sessionFactory.getCriteriaBuilder());
             filter.putFilterAttribute(HibernateBindKeys.USER_ID_COL, userId);
-            filter.putFilterAttribute(HibernateBindKeys.USER_NAME_COL, userName);
-            filter.putFilterAttribute(HibernateBindKeys.USER_NICKNAME_COL, userNickname);
-            filter.putFilterAttribute(HibernateBindKeys.USER_EMAIL_COL, userEMail);
+            filter.addSetAttribute(HibernateBindKeys.USER_NAME_COL, userName);
+            filter.addSetAttribute(HibernateBindKeys.USER_NICKNAME_COL, userNickname);
+            filter.addSetAttribute(HibernateBindKeys.USER_EMAIL_COL, userEMail);
             session.createQuery(filter.getCriteriaUpdate()).executeUpdate();
             tx.commit();
         } catch (HibernateException e) {

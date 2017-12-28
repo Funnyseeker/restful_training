@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * Класс представляющий пользователя.
+ * Имплементация интерфейса {@link User}
+ */
 @Entity
 @Table(name = HibernateBindKeys.USERS_TAB)
 public class EntityUserImpl implements User {

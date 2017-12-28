@@ -1,5 +1,8 @@
 package fun.trainings.rs.model;
 
+/**
+ * Класс хранящий ключи, которые могут быть использованы для связи полей с базой данных.
+ */
 public class HibernateBindKeys {
     public static final String USERS_TAB = "\"USERS\"";
     public static final String USER_ID_COL = "\"ID\"";

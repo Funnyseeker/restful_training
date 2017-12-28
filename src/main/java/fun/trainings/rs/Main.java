@@ -16,6 +16,5 @@ public class Main extends ResourceConfig {
     }
 
     public static void main(String[] args) {
-//        ApplicationContext context = new ClassPathXmlApplicationContext("spring/beans.xml");
     }
 }
