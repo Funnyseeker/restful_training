@@ -3,6 +3,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+    <bean id="appProperties"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:application.properties"/>
+    </bean>
+
     <!--XML beans-->
     <!--<bean class="fun.trainings.rs.springgerBeanPostProcessor"/>-->
     <!--<bean id="xmlUserFactory" class="fun.trainings.rs.model.factories.impl.XMLUserFactory" scope="singleton"/>-->
@@ -18,8 +23,8 @@
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="160494"/>
+        <property name="username" value="${db.login}"/>
+        <property name="password" value="${db.password}"/>
         <!--<property name="schema" value="rest"/>-->
     </bean>
     <bean id="hibernateLocalSessionFactory"
