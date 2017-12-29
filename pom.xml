@@ -11,7 +11,7 @@
     </properties>
 
     <groupId>fun.trainings.rs</groupId>
-    <artifactId>restful_training</artifactId>
+    <artifactId>restful-training</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
     <build>
