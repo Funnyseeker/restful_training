@@ -10,8 +10,8 @@
         <hibernate.version>5.2.12.Final</hibernate.version>
     </properties>
 
-    <groupId>fun.trainings.rs</groupId>
-    <artifactId>restful-training</artifactId>
+    <groupId>fun.trainings</groupId>
+    <artifactId>restful</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
     <build>
